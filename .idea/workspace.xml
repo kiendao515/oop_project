@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dacd531b-9fd5-4dfe-9373-0b3e6243e3ab" name="Default Changelist" comment="" />
+    <list default="true" id="dacd531b-9fd5-4dfe-9373-0b3e6243e3ab" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/Home.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/Filee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/Graph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/ReadFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service_impl/GraphImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service_impl/ReadFileImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.png" beforeDir="false" afterPath="$PROJECT_DIR$/output.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/FileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entity/FileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/FileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entity/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/Point.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,11 +27,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1rG0PpcnZBPV9WNdTJKoHoswyeT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +44,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Dropbox/Kiến trúc máy tính/gs-ui-javafx-2.0.jar!/" />
@@ -36,13 +60,52 @@
       <recent name="C:\Users\admin\IdeaProjects\OopsBigAssignment\src\main\java\entity\" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FileReader">
+  <component name="RunManager" selected="Application.GraphImpl">
     <configuration name="FileReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="entity.FileReader" />
       <module name="OopsBigAssignment" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GraphImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="service_impl.GraphImpl" />
+      <module name="OopsBigAssignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service_impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Home" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="controller.Home" />
+      <module name="OopsBigAssignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReadFileImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="service_impl.ReadFileImpl" />
+      <module name="OopsBigAssignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service_impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -65,6 +128,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GraphImpl" />
+        <item itemvalue="Application.Home" />
+        <item itemvalue="Application.ReadFileImpl" />
         <item itemvalue="Application.FileReader" />
         <item itemvalue="Application.test" />
       </list>
@@ -93,7 +159,13 @@
       <option name="presentableId" value="Default" />
       <updated>1618587097968</updated>
       <workItem from="1618587101708" duration="10309000" />
-      <workItem from="1618625643463" duration="6197000" />
+      <workItem from="1618625643463" duration="10610000" />
+      <workItem from="1618646736450" duration="9251000" />
+      <workItem from="1618656596195" duration="57000" />
+      <workItem from="1618656680410" duration="439000" />
+      <workItem from="1618657162014" duration="1125000" />
+      <workItem from="1618658325047" duration="4532000" />
+      <workItem from="1618664810098" duration="5044000" />
     </task>
     <servers />
   </component>
@@ -109,30 +181,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1618587523493" />
-    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1618628801929">
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1618655468342">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1618628801929" />
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1618655468342" />
+    <state x="496" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1618652686602">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="496" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1618652686602" />
+    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1618664729984">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1618664729984" />
     <state x="473" y="155" key="FileChooserDialogImpl" timestamp="1618594785635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1618594785635" />
-    <state width="1493" height="22" key="GridCell.Tab.0.bottom" timestamp="1618631288230">
+    <state width="1493" height="231" key="GridCell.Tab.0.bottom" timestamp="1618673236186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="22" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1618631288230" />
-    <state width="1493" height="22" key="GridCell.Tab.0.center" timestamp="1618631288229">
+    <state width="1493" height="231" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1618673236186" />
+    <state width="1493" height="231" key="GridCell.Tab.0.center" timestamp="1618673236186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="22" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1618631288229" />
-    <state width="1493" height="22" key="GridCell.Tab.0.left" timestamp="1618631288229">
+    <state width="1493" height="231" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1618673236186" />
+    <state width="1493" height="231" key="GridCell.Tab.0.left" timestamp="1618673236186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="22" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1618631288229" />
-    <state width="1493" height="22" key="GridCell.Tab.0.right" timestamp="1618631288230">
+    <state width="1493" height="231" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1618673236186" />
+    <state width="1493" height="231" key="GridCell.Tab.0.right" timestamp="1618673236186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="22" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1618631288230" />
+    <state width="1493" height="231" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1618673236186" />
     <state x="299" y="68" key="Maven.ArtifactSearchDialog" timestamp="1618629034435">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -141,9 +221,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1618594790244" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1618625671564">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1618664816516">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1618625671564" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1618664816516" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1618655587901">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1618655587901" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1618646078835">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1618646078835" />
   </component>
 </project>
