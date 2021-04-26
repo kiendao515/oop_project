@@ -1,63 +1,193 @@
 package test;
 
+import entity.Point;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class Demo {
-    public static void main(String[] args) {
-        System.setProperty("org.graphstream.ui","swing");//
 
-        Graph graph = new SingleGraph("Tutorial 1");
 
-        graph.setStrict(false);
-        graph.setAutoCreate( true );
-    /*
-    1 2 3
-    2 4
-    3 4
-     */
-        Map<Integer, List<Integer>> map= new HashMap<>();
-        List<Integer> list= new ArrayList<>();
-        list.add(2);
-        list.add(3);
+    static int NumberNode = 0;
+    static int MAXN = 10000005;
+    // private static Object point;
+    static Point point[] = new Point[MAXN];
+    static int trace[] = new int[MAXN];
+    static int NumberPath = 0;
+    static int CurrentNode = 1;
+    static ArrayList<ArrayList<Integer>> Path = new ArrayList<ArrayList<Integer>>();
+    static ArrayList<Integer> Save = new ArrayList<Integer>();
+    static ArrayList<Integer> paths = new ArrayList<Integer>();
+    static ArrayList<Integer> Suggest = new ArrayList<Integer>();
 
-        List<Integer> list2= new ArrayList<>();
-        list2.add(4);
+    static void convert(String s) {
+        int index = 0, node, next;
+        String string = "";
+        while (s.charAt(index) != ' ')
+            string += s.charAt(index++);
+        node = Integer.parseInt(string);
+        NumberNode = Math.max(NumberNode, node);
+        string = "";
+        ++index;
+        // point[node]= new Point(node);
 
-        List<Integer> list3= new ArrayList<>();
-        list3.add(4);
-        map.put(1,list);
-        map.put(2,list2);
-        map.put(3,list3);
-
-        System.out.println(String.valueOf(1+""+list.get(0)));
-        for (Map.Entry<Integer,List<Integer>> e : map.entrySet()){
-            System.out.println("Key: " + e.getKey()
-                    + " Value: " + e.getValue());
+        while (index <= s.length()) {
+            if (index == s.length() || s.charAt(index) == ' ') {
+                next = Integer.parseInt(string);
+                NumberNode = Math.max(NumberNode, next);
+                point[node].getList().add(next);
+                ++index;
+                string = "";
+                continue;
+            }
+            string += s.charAt(index++);
         }
-
-        /**
-         *  cai phan duoi nayf để vẽ đồ thị
-         *  thì nó có ba tham số tham số 1 là cái cạnh nối 2 đỉnh ví dụ kiểu 12, tham số thứ 2 là đỉnh 1, tham số
-         *  thứ 3 laf đỉnh 2
-         *  thì cần phải lưu trữ cái output đoc từ file như nào để cho dễ code cái vẽ nhỉ??
-         *  ênguyn 2 đỉnh ko đươcn à :v
-         *  kiểu như này  á
-         *  12 àl sao
-         *  đm len fb
-         */
-        graph.addEdge((1+""+list.get(0)),String.valueOf(1),String.valueOf(list.get(0)));
-        graph.addEdge("12","1","2");// kiểu này
-        graph.addEdge((1+""+list.get(1)),String.valueOf(1),String.valueOf(list.get(1)));
-        graph.addEdge((2+""+list2.get(0)),String.valueOf(2),String.valueOf(list2.get(0)));
-        graph.addEdge((3+""+list3.get(0)), String.valueOf(3),String.valueOf(list3.get(0)));
-
-        graph.display();
+        Collections.sort(point[node].getList());
     }
 
+    static void Print() {
+        for (ArrayList<Integer> a : Path) {
+            for (Integer b : a)
+                System.out.print(b + " ");
+            System.out.println();
+        }
+    }
+
+    static void Trace(int index) {
+        ArrayList<Integer> path = new ArrayList<Integer>();
+        while (true) {
+            // System.out.print(index+ " ");
+            path.add(index);
+            index = trace[index];
+            if (index == 1)
+                break;
+        }
+        // System.out.println(1);
+        path.add(1);
+        Collections.reverse(path);
+        Path.add(path);
+    }
+
+    static void DFS(int index) {
+        if (index == NumberNode) {
+            Trace(NumberNode);
+            return;
+        }
+
+        for (Integer node : point[index].getList()) {
+            if (trace[node] != 0)
+                continue;
+            trace[node] = index;
+            DFS(node);
+            trace[node] = 0;
+        }
+    }
+
+    static boolean Comparable(int middle) {
+        paths = Path.get(middle);
+        for (int index = 0; index < Save.size(); index++)
+        {
+            if (Save.get(index) < paths.get(index))
+                return false;
+            if (Save.get(index) > paths.get(index))
+                return true;
+        }
+        return false;
+    }
+
+    static boolean ReComparable(int middle) {
+        paths = Path.get(middle);
+        for (int index = 0; index < Save.size(); index++)
+        {
+            if (Save.get(index) > paths.get(index))
+                return false;
+            if (Save.get(index) < paths.get(index))
+                return true;
+        }
+        return false;
+    }
+
+    static void OnTheWay()
+    {
+        Save.add(CurrentNode);
+        System.out.println("I have some suggestions for your next node: ");
+
+        int Left, Right, left= -1, right= Path.size()- 1;
+        while(right- left> 1){
+            int middle= (right+ left)/ 2;
+            if(Comparable(middle)) left= middle;
+            else right= middle;
+        }
+        Left= right;
+
+        left= 0;
+        right= Path.size();
+        while(right- left> 1){
+            int middle= (right+ left)/ 2;
+            if(ReComparable(middle)) right= middle;
+            else left= middle;
+        }
+        Right= right;
+
+        Suggest.clear();
+        int Pre= 0;
+        for(int index= Left; index< Right; index++)
+        {
+            paths= Path.get(index);
+            //if(Suggest.get(Suggest.size()- 1)!= paths.get(Save.size()))
+            if(paths.get(Save.size())!= Pre)
+            {
+                Suggest.add(paths.get(Save.size()));
+                Pre= paths.get(Save.size());
+            }
+        }
+
+        System.out.println(Suggest);
+        System.out.println("Your choice: ");
+
+        //int choice;
+        while(true){
+            Scanner scanner = new Scanner(System.in);
+            CurrentNode= scanner.nextInt();
+            boolean nice= Suggest.contains(CurrentNode);
+            if(nice){
+                System.out.println("Nice choice!!!");
+                break;
+            }
+            else System.out.println("Bad choice, please choose another one: ");
+        }
+
+        //CurrentNode;
+    }
+
+    public static void main(String[] args) {
+        for (int index = 1; index < MAXN; index++)
+            point[index] = new Point();
+        try {
+            File myObj = new File("input.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                convert(data);
+                // System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        trace[1]= -1;
+        DFS(1);
+        System.out.println("You now are in node 1!");
+        while (true) {
+            OnTheWay();
+            if (CurrentNode == NumberNode)
+                break;
+        }
+
+    }
 }
