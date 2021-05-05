@@ -27,8 +27,20 @@ public class GraphExplore extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 //        new GraphExplore();
-        service.Graph graph= new GraphImpl();
-        graph.display("C:\\Users\\admin\\Dropbox\\project_inputtest\\input.txt");
+//        service.Graph graph= new GraphImpl();
+//        graph.display("C:\\Users\\admin\\Dropbox\\project_inputtest\\input.txt");
+        Thread t = new Thread() {   // Create an instance of an anonymous inner class that extends Thread
+            @Override
+            public void run() {
+                new GraphSwing().display();
+                    try {
+                        sleep(10); // milliseconds
+                    } catch (InterruptedException ex) {}
+
+            }
+        };
+        t.start();
+
     }
 
     public GraphExplore() {

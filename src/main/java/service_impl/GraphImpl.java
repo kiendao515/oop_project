@@ -5,9 +5,15 @@ import entity.Point;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.ui.swing_viewer.DefaultView;
+import org.graphstream.ui.swing_viewer.SwingViewer;
+import org.graphstream.ui.swing_viewer.ViewPanel;
+import org.graphstream.ui.view.Viewer;
 import service.Graph;
 import service.ReadFile;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -152,7 +158,7 @@ public class GraphImpl implements Graph {
             }
         }
 
-//        System.out.println(Suggest);
+        System.out.println(Suggest);
         System.out.println("Your choice: ");
 
         //int choice;
@@ -173,59 +179,89 @@ public class GraphImpl implements Graph {
 
 
     private ReadFile readFile= new ReadFileImpl();
+    JFrame  frame= new JFrame();
+    JButton myButton = new JButton("MyButton");
+
     @Override
     public void display(String pathname) {
-        FileReader reader= new FileReader();
-        System.setProperty("org.graphstream.ui","swing");//
-        System.setProperty("org.graphstream.ui", "org.graphstream.ui.swing.util.Display");
-        org.graphstream.graph.Graph graph = new MultiGraph("main graph");
-        graph.setStrict(false);
-        graph.setAutoCreate(true);
+        frame.setPreferredSize(new Dimension(600, 600));
+        myButton.addActionListener(e -> {
+            FileReader reader= new FileReader();
+            System.setProperty("org.graphstream.ui","swing");//
+            System.setProperty("org.graphstream.ui", "org.graphstream.ui.swing.util.Display");
+            org.graphstream.graph.Graph graph = new MultiGraph("main graph");
+            graph.setStrict(false);
+            graph.setAutoCreate(true);
 
-        for(int i= 1; i< reader.MAXN; i++)
-            reader.point[i]= new Point();
 
-        try {
-            File myObj = new File(pathname);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                reader.convert(data);
-                //System.out.println(data);
+            for(int i= 1; i< reader.MAXN; i++)
+                reader.point[i]= new Point();
+
+            try {
+                File myObj = new File(pathname);
+                Scanner myReader = new Scanner(myObj);
+                while (myReader.hasNextLine()) {
+                    String data = myReader.nextLine();
+                    reader.convert(data);
+                    //System.out.println(data);
+                }
+                myReader.close();
+            } catch (FileNotFoundException e2) {
+                System.out.println("An error occurred.");
+                e2.printStackTrace();
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
 
 //        graph.addNode(String.valueOf(NumberNode));
 
-        // display graph
-        for(int index= 1; index<= reader.NumberNode; index++){
-            Node e1;
-            graph.addNode(String.valueOf(index));
-            e1=graph.getNode(String.valueOf(index));
-            e1.setAttribute("ui.style", "stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
-            e1.setAttribute("ui.label", String.valueOf(index));
-            e1.setAttribute("ui.class","marked");
-            for (Integer node : reader.point[index].getList()) {
-                Edge edge;
-                graph.addNode(String.valueOf(node));
-                e1=graph.getNode(String.valueOf(node));
-                e1.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
-                e1.setAttribute("ui.label", String.valueOf(node));
-                graph.addEdge(index+""+node,String.valueOf(node),String.valueOf(index),true);
-                if(graph.getEdge(index+""+node)!=null){
-                    edge= graph.getEdge(index+""+node);
-                    edge.setAttribute("ui.style","arrow-shape: arrow;");
+            // display graph
+            for(int index= 1; index<= reader.NumberNode; index++){
+                Node e1;
+                graph.addNode(String.valueOf(index));
+                e1=graph.getNode(String.valueOf(index));
+                e1.setAttribute("ui.style", "stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
+                e1.setAttribute("ui.label", String.valueOf(index));
+                e1.setAttribute("ui.class","marked");
+                for (Integer node : reader.point[index].getList()) {
+                    Edge edge;
+                    graph.addNode(String.valueOf(node));
+                    e1=graph.getNode(String.valueOf(node));
+                    e1.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
+                    e1.setAttribute("ui.label", String.valueOf(node));
+                    graph.addEdge(index+""+node,String.valueOf(node),String.valueOf(index),true);
+                    if(graph.getEdge(index+""+node)!=null){
+                        edge= graph.getEdge(index+""+node);
+                        edge.setAttribute("ui.style","arrow-shape: arrow;");
+                    }
                 }
             }
-        }
-        graph.setAttribute("ui.antialias");
-        graph.setAttribute(styleSheet);
-        graph.display(true);
-        graph.setAttribute("ui.screenshot", "C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\output.png");
+            graph.setAttribute("ui.antialias");
+            graph.setAttribute(styleSheet);
+            SwingViewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+            DefaultView view = (DefaultView) viewer.addDefaultView(false);   // false indicates "no JFrame".
+            view.setPreferredSize(new Dimension(400, 400));
+            frame.setLayout(new FlowLayout());
+            frame.add(view);
+            viewer.enableAutoLayout();
+        });
+        frame.add(myButton);
+
+//        graph.display(true);
+
+
+//        ViewPanel viewPanel = (ViewPanel) viewer.addDefaultView(false);
+//        viewPanel.enableMouseOptions();
+//        panel.add(viewPanel);
+
+
+//        panel.setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+//        frame.add(panel);
+
+
+        frame.pack();
+
+
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
 
 
@@ -273,6 +309,7 @@ public class GraphImpl implements Graph {
 
     public static void main(String[] args) {
         Graph graph= new GraphImpl();
+
         graph.display("input.txt");
     }
 }
