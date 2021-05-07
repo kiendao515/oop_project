@@ -1,4 +1,4 @@
-package test;
+package controller;
 
 import entity.FileReader;
 import entity.Point;
@@ -25,7 +25,7 @@ import javax.swing.*;
  *
  * @author admin kien, an
  */
-public class ChatPanel extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame {
 
     static int NumberNode = 0;
     static int MAXN = 10000005;
@@ -35,7 +35,6 @@ public class ChatPanel extends javax.swing.JFrame {
     static List<List<Integer>> Path = new ArrayList<>();
     static List<Integer> Save = new ArrayList<>();
     static List<Integer> paths = new ArrayList<>();
-    static List<Integer> Suggest = new ArrayList<>();
     static String filename;
     List<Integer> nodeUsed= new ArrayList<>();
     List<Integer> suggest;
@@ -49,7 +48,6 @@ public class ChatPanel extends javax.swing.JFrame {
         NumberNode = Math.max(NumberNode, node);
         string = "";
         ++index;
-        // point[node]= new Point(node);
 
         while (index <= s.length()) {
             if (index == s.length() || s.charAt(index) == ' ') {
@@ -119,7 +117,7 @@ public class ChatPanel extends javax.swing.JFrame {
         return false;
     }
 
-    public ChatPanel() {
+    public GUI() {
         initComponents();
     }
 
@@ -131,7 +129,6 @@ public class ChatPanel extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
-
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
@@ -142,7 +139,7 @@ public class ChatPanel extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        //jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
@@ -236,21 +233,6 @@ public class ChatPanel extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Finding routes", jPanel2);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 890, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 532, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Temp", jPanel3);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -423,6 +405,7 @@ public class ChatPanel extends javax.swing.JFrame {
 //        pack();
 //        setLocationRelativeTo(null);
         setVisible(true);
+        setResizable(false);
     }
 
 
@@ -554,6 +537,7 @@ public class ChatPanel extends javax.swing.JFrame {
             Node node1= graph.getNode(String.valueOf(nodeUsed.get(i)));
             node1.setAttribute("ui.style", "stroke-mode: plain;shape:circle;fill-color: rgb(204, 204, 255);size: 20px; text-alignment: center;");
         }
+        setResizable(false);
 
     }
 
@@ -609,10 +593,10 @@ public class ChatPanel extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        int temp= JOptionPane.showConfirmDialog(this,"Do you want to shut down the system?","confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-         if(temp==JOptionPane.YES_OPTION){
-             System.exit(0);
-         }
+        int temp= JOptionPane.showConfirmDialog(this,"Do you want to shut down the system?","Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(temp==JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
     }
 
     private void textField1KeyPressed(java.awt.event.KeyEvent evt) {
@@ -646,20 +630,20 @@ public class ChatPanel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(test.ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChatPanel().setVisible(true);
+                new test.ChatPanel().setVisible(true);
             }
         });
     }
@@ -675,7 +659,6 @@ public class ChatPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static  javax.swing.JTextArea jTextArea1;
@@ -684,4 +667,6 @@ public class ChatPanel extends javax.swing.JFrame {
     public static javax.swing.JTextField jTextField3;
     // End of variables declaration
 }
+
+
 
