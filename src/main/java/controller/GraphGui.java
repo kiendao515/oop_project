@@ -467,10 +467,10 @@ public class GraphGui extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-           String s="Members:\n•\t";
-           s+="Đào Trung Kiên-20194306\n•\tĐào Xuân An-20190076\n•\tNguyễn Tiến Đạt - 20194243\n•\tNguyễn Quang Long - 2019432\n•\tNguyễn Bá Bình - 2019423" +
-                   "\n•\tĐinh Trọng Nghĩa - 20194340";
-          JOptionPane.showMessageDialog(null,s);
+        String s="Members:\n•\t";
+        s+="Đào Trung Kiên-20194306\n•\tĐào Xuân An-20190076\n•\tNguyễn Tiến Đạt - 20194243\n•\tNguyễn Quang Long - 2019432\n•\tNguyễn Bá Bình - 2019423" +
+                "\n•\tĐinh Trọng Nghĩa - 20194340";
+        JOptionPane.showMessageDialog(null,s);
     }
 
     // insert node
@@ -568,31 +568,31 @@ public class GraphGui extends javax.swing.JFrame {
     static String style="stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;";
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-       if(!jTextField2.getText().equals("1")){
-           Node node= graph.getNode(String.valueOf(jTextField2.getText()));
-           node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
-           Save.remove(Save.size()-1);
-           jTextField2.setText(String.valueOf(Save.get(Save.size()-1)));
+        if(!jTextField2.getText().equals("1")){
+            Node node= graph.getNode(String.valueOf(jTextField2.getText()));
+            node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
+            Save.remove(Save.size()-1);
+            jTextField2.setText(String.valueOf(Save.get(Save.size()-1)));
 
-           for (Map.Entry<Integer,List<Integer>> me : map.entrySet()) {
-               if(me.getKey().equals(Integer.parseInt(jTextField2.getText()))){
-                   System.out.println("ok");
-                   jTextField3.setText(String.valueOf(me.getValue()));
-                   System.out.println("suggestion:"+me.getValue());
-                   jTextField1.setText(String.valueOf(Save));
-                   break;
-               }
-           }
-       }else{
-           Node node= graph.getNode(String.valueOf(maxNode));
-           Node node1= graph.getNode(String.valueOf(1));
-           node1.setAttribute("ui.style",style);
-           node.setAttribute("ui.style",style);
-           jTextField2.setText("");
-           jTextField1.setText("");
-           jTextField3.setText("");
-           suggest.clear();
-           Save.clear();
+            for (Map.Entry<Integer,List<Integer>> me : map.entrySet()) {
+                if(me.getKey().equals(Integer.parseInt(jTextField2.getText()))){
+                    System.out.println("ok");
+                    jTextField3.setText(String.valueOf(me.getValue()));
+                    System.out.println("suggestion:"+me.getValue());
+                    jTextField1.setText(String.valueOf(Save));
+                    break;
+                }
+            }
+        }else{
+            Node node= graph.getNode(String.valueOf(maxNode));
+            Node node1= graph.getNode(String.valueOf(1));
+            node1.setAttribute("ui.style",style);
+            node.setAttribute("ui.style",style);
+            jTextField2.setText("");
+            jTextField1.setText("");
+            jTextField3.setText("");
+            suggest.clear();
+            Save.clear();
         }
     }
 
