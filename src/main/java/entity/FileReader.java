@@ -1,5 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package entity;
 
+/**
+ *
+ * @author admin
+ */
 public class FileReader {
     public static int NumberNode= 0;
     public static final int MAXN= 10000005;
@@ -9,6 +19,7 @@ public class FileReader {
         String string= "";
         while(s.charAt(index)!= ' ')
             string+= s.charAt(index++);
+        string.trim();
         node= Integer.parseInt(string);
         NumberNode= Math.max(NumberNode, node);
         string= "";

@@ -2,31 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dacd531b-9fd5-4dfe-9373-0b3e6243e3ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/GUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/MainFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/impl/GraphImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/impl/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/impl/ReSimulate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/impl/ReadInput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/impl/Simulate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/GraphGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GraphGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/GraphGui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/ChatPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/FileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$12.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/GraphGui.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entity/FileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/FileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entity/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/Point.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,20 +96,7 @@
       <recent name="C:\Users\admin\IdeaProjects\OopsBigAssignment\src\main\java\entity\" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUI">
-    <configuration name="ChatPanel (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.ChatPanel" />
-      <module name="OopsBigAssignment" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.MainFrame">
     <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="controller.GUI" />
       <module name="OopsBigAssignment" />
@@ -123,12 +123,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReadFileImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="service_impl.ReadFileImpl" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="impl.Main" />
       <module name="OopsBigAssignment" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="service_impl.*" />
+          <option name="PATTERN" value="impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -136,12 +136,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="hi" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.hi" />
+    <configuration name="MainFrame (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainFrame" />
+      <module name="OopsBigAssignment" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="controller.MainFrame" />
       <module name="OopsBigAssignment" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value="controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -151,11 +158,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GUI" />
+        <item itemvalue="Application.MainFrame" />
+        <item itemvalue="Application.MainFrame (1)" />
         <item itemvalue="Application.GraphGui" />
-        <item itemvalue="Application.ChatPanel (1)" />
-        <item itemvalue="Application.hi" />
-        <item itemvalue="Application.ReadFileImpl" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.GUI" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +225,13 @@
       <workItem from="1620876495339" duration="12974000" />
       <workItem from="1620963281409" duration="661000" />
       <workItem from="1621395084816" duration="20067000" />
-      <workItem from="1621497834026" duration="18634000" />
+      <workItem from="1621497834026" duration="18785000" />
+      <workItem from="1621561877582" duration="7168000" />
+      <workItem from="1621608634106" duration="2162000" />
+      <workItem from="1621869933742" duration="3171000" />
+      <workItem from="1621909451768" duration="33515000" />
+      <workItem from="1621985525355" duration="199000" />
+      <workItem from="1622008417658" duration="8261000" />
     </task>
     <servers />
   </component>
@@ -234,10 +247,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1618587523493" />
-    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1620406595591">
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser" timestamp="1621954660967">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1620406595591" />
+    <state x="574" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1621954660967" />
     <state x="566" y="273" width="403" height="287" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1620033984617">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -250,26 +263,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1620407158824" />
-    <state x="473" y="155" key="FileChooserDialogImpl" timestamp="1620965457856">
+    <state x="473" y="155" key="FileChooserDialogImpl" timestamp="1621563648428">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="473" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1620965457856" />
-    <state width="1493" height="143" key="GridCell.Tab.0.bottom" timestamp="1621528126655">
+    <state x="473" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1621563648428" />
+    <state width="1493" height="128" key="GridCell.Tab.0.bottom" timestamp="1622018836781">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="143" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1621528126655" />
-    <state width="1493" height="143" key="GridCell.Tab.0.center" timestamp="1621528126655">
+    <state width="1493" height="128" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622018836781" />
+    <state width="1493" height="128" key="GridCell.Tab.0.center" timestamp="1622018836781">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="143" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1621528126655" />
-    <state width="1493" height="143" key="GridCell.Tab.0.left" timestamp="1621528126655">
+    <state width="1493" height="128" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1622018836781" />
+    <state width="1493" height="128" key="GridCell.Tab.0.left" timestamp="1622018836781">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="143" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1621528126655" />
-    <state width="1493" height="143" key="GridCell.Tab.0.right" timestamp="1621528126655">
+    <state width="1493" height="128" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1622018836781" />
+    <state width="1493" height="128" key="GridCell.Tab.0.right" timestamp="1622018836781">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="143" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1621528126655" />
+    <state width="1493" height="128" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1622018836781" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1620233418695">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -290,22 +303,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="299" y="68" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1618678721813" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1619534486975">
+    <state x="249" y="0" key="SettingsEditor" timestamp="1621934647655">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1619534486975" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1621497849001">
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1621934647655" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1621985532002">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1621497849001" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1621985532002" />
+    <state x="209" y="109" key="new project wizard" timestamp="1621985719214">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="109" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1621985719214" />
     <state x="475" y="42" key="refactoring.ChangeSignatureDialog" timestamp="1620043414593">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="42" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1620043414593" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1621407661669">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1621870300374">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1621407661669" />
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1621870300374" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1621522276513">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
