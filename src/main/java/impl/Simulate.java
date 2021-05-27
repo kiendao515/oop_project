@@ -7,7 +7,7 @@ package impl;
 public class Simulate{
 
     public static int trace[] = new int[Main.MAXN];
-    public static ArrayList<ArrayList<Integer>> Path = new ArrayList<ArrayList<Integer>>();
+    public static ArrayList<ArrayList<Integer>> Path = new ArrayList<>();
     public static ArrayList<Integer> Save = new ArrayList<Integer>();
     public static ArrayList<Integer> paths = new ArrayList<Integer>();
     public static ArrayList<Integer> Suggest = new ArrayList<Integer>();

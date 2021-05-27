@@ -6,6 +6,9 @@
 
 package entity;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author admin
@@ -36,6 +39,25 @@ public class FileReader {
             }
             string+= s.charAt(index++);
         }
+    }
+    public static void main(String[] argv) throws Exception {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        JTable table = new JTable(tableModel);
+        tableModel.addColumn("Language/ Technology");
+        tableModel.addColumn("Difficulty Level");
+        tableModel.insertRow(0, new Object[] { "CSS", "Easy" });
+        tableModel.insertRow(0, new Object[] { "HTML5", "Easy"});
+        tableModel.insertRow(0, new Object[] { "JavaScript", "Intermediate" });
+        tableModel.insertRow(0, new Object[] { "jQuery", "Intermediate" });
+        tableModel.insertRow(0, new Object[] { "AngularJS", "Difficult"});
+        // adding a new row
+        tableModel.insertRow(tableModel.getRowCount(), new Object[] { "ExpressJS", "Intermediate" });
+        // appending a new row
+        tableModel.addRow(new Object[] { "WordPress", "Easy" });
+        JFrame f = new JFrame();
+        f.setSize(550, 350);
+        f.add(new JScrollPane(table));
+        f.setVisible(true);
     }
 
 

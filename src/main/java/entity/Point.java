@@ -12,7 +12,7 @@ public class Point {
 
 
     public Point(){
-        pointList= new ArrayList<>();
+        list.clear();
     }
 
 
