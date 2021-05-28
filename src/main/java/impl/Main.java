@@ -11,7 +11,7 @@ public class Main {
     public static int end;
     public static boolean exist[] = new boolean[MAXN];
     public static Point point[] = new Point[MAXN];
-    static int CurrentNode = 1;
+    public static int CurrentNode = 1;
 
     public static void ReSet() {
         NumberNode = 0;

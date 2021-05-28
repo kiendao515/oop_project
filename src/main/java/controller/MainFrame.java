@@ -81,7 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
 
@@ -320,8 +320,9 @@ public class MainFrame extends javax.swing.JFrame {
         Main.start=number1;
         Main.end=number2;
         Simulate simulate= new Simulate();
-        simulate.FindAllPaths(number1);
+        //simulate.FindAllPaths(number1,number2);
         jTable1.setModel(new DefaultTableModel(null,new String[]{"All of routes"}));
+        jTable1.setRowHeight(25);
         defaultTableModel.addColumn("All of routes:");
         for (int i = 0; i < Simulate.Path.size(); i++) {
             for (int j = 0; j < Simulate.Path.get(i).size(); j++) {
@@ -383,43 +384,6 @@ public class MainFrame extends javax.swing.JFrame {
                 Main.point[i].getList().remove(index);
     }
 
-    static void editByHand(){
-        JTextArea textArea = new JTextArea();
-        textArea.setWrapStyleWord(true);
-        textArea.setSize(textArea.getPreferredSize().width, 1);
-        String temp="";
-        try {
-            File file = new File(filename);
-            Scanner myReader = new Scanner(file);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                temp+=data+"\n";
-                System.out.println(data);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        textArea.setText(temp);
-        JOptionPane.showMessageDialog(null, new JScrollPane( textArea), "File edit:",
-                JOptionPane.WARNING_MESSAGE);
-        System.out.println(filename);
-
-        temp=textArea.getText();
-        PrintWriter printWriter=null;
-        try {
-            printWriter= new PrintWriter(new FileOutputStream(filename));
-            printWriter.println(temp.trim());
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        finally {
-            printWriter.close();
-        }
-
-    }
     static void editAuto(){
         String[] category = new String[4];
         category[0] = "Add Node";
@@ -441,15 +405,7 @@ public class MainFrame extends javax.swing.JFrame {
     // edit graph
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        String[] category= new String[2];
-        category[0]= "Edit by overwritting file";
-        category[1]="Edit step by step";
-        Object select =JOptionPane.showInputDialog(null, "Choose your selection", "Your selection",JOptionPane.QUESTION_MESSAGE,null,category,category[0]);
-        if(select.equals(category[0])){
-            editByHand();
-        }else if(select.equals(category[1])){
-            editAuto();
-        }
+        editAuto();
     }
     static String[] temp2;
     static boolean check2;
@@ -457,14 +413,14 @@ public class MainFrame extends javax.swing.JFrame {
     // click to table
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
+        if(check){
+            resetRow();
+        }
         int x= jTable1.getSelectedRow();
         String y=(String)jTable1.getValueAt(x,0);
         y=y.trim();
        // System.out.println(y);
         temp2= y.split(" ");
-        if(check){
-            resetRow();
-        }
         for(int i=0;i<temp2.length;i++){
             System.out.println("day la tem2:"+temp2[i]);
             Node node=graph.getNode(temp2[i]);
@@ -477,6 +433,7 @@ public class MainFrame extends javax.swing.JFrame {
         if(temp2!=null){
             for(int i=0;i<temp2.length;i++){
                 System.out.println("temp2:"+(temp2[i]));
+                if(graph.getNode(String.valueOf(temp2[i]))==null) continue;
                 Node node=graph.getNode(String.valueOf(temp2[i]));
                 node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
                 temp2[i]="";
@@ -500,17 +457,25 @@ public class MainFrame extends javax.swing.JFrame {
     //lock graph
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-      //  viewer.disableAutoLayout();
-//        Simulate.Path.removeAll(Simulate.Path);
-//        if(temp2!=null){
-//            for(int i=0;i<temp2.length;i++){
-//                Node node=graph.getNode(temp2[i]);
-//                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
-//            }
-//        }
-//        Simulate.Path.removeAll(Simulate.Path);
-        Remove();
-        clear();
+        viewer.disableAutoLayout();
+        Simulate.Path.removeAll(Simulate.Path);
+        if(temp2!=null){
+            for(int i=0;i<temp2.length;i++){
+                Node node=graph.getNode(temp2[i]);
+                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
+            }
+        }
+        Simulate.Path.removeAll(Simulate.Path);
+//        Remove();
+//        clear();
+    }
+    static String getNumberNode;
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+         //   getNumberNode=jTextField1.getText();
+            getNumberNode= getNumberNode.replaceAll("\\s+","");
+        }
     }
 
     /**

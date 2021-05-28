@@ -1,20 +1,30 @@
 package impl;
 
-        import java.util.ArrayList;
-        import java.util.Collections;
-        import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import controller.MainFrame2;
 
 public class Simulate{
 
     public static int trace[] = new int[Main.MAXN];
-    public static ArrayList<ArrayList<Integer>> Path = new ArrayList<>();
+    public static ArrayList<ArrayList<Integer>> Path = new ArrayList<ArrayList<Integer>>();
     public static ArrayList<Integer> Save = new ArrayList<Integer>();
     public static ArrayList<Integer> paths = new ArrayList<Integer>();
     public static ArrayList<Integer> Suggest = new ArrayList<Integer>();
 
-    public Simulate(){}
+    public Simulate(){
+        Path.clear();
+        Save.clear();
+        paths.clear();
+        Suggest.clear();
+    }
 
-    static void Reset(){
+    static void Reset()
+    {
         for(int i= 0; i<= Main.NumberNode; i++)
             trace[i]= 0;
     }
@@ -100,8 +110,7 @@ public class Simulate{
         return false;
     }
 
-    static void OnTheWay()
-    {
+    public static void OnTheWay(){
         Save.add(Main.CurrentNode);
         System.out.println("I have some suggestions for your next node: ");
 
@@ -128,6 +137,11 @@ public class Simulate{
         for(int index= Left; index< Right; index++)
         {
             paths= Path.get(index);
+            //if(Suggest.get(Suggest.size()- 1)!= paths.get(Save.size()))
+            if(paths.size()== Save.size()){
+                Main.CurrentNode= Main.end;
+                return;
+            }
             if(paths.get(Save.size())!= Pre)
             {
                 Suggest.add(paths.get(Save.size()));
@@ -135,27 +149,20 @@ public class Simulate{
             }
         }
 
+        MainFrame2.jTextField1.setText(String.valueOf(Suggest));
         System.out.println(Suggest);
         System.out.println("Your choice: ");
+        Main.CurrentNode= Integer.parseInt(MainFrame2.jTextField2.getText());
+        boolean nice= Suggest.contains(Main.CurrentNode);
 
-        while(true){
-            Scanner scanner = new Scanner(System.in);
-            Main.CurrentNode= scanner.nextInt();
-            boolean nice= Suggest.contains(Main.CurrentNode);
-            if(nice){
-                System.out.println("Nice choice!!!");
-                break;
-            }
-            else System.out.println("Bad choice, please choose another one: ");
-        }
     }
 
     //  Tìm tất cả đường đi
-    public void FindAllPaths(int start)
+    public void FindAllPaths()
     {
         Reset();
-        trace[start]= -1;
-        DFS(start);
+        trace[Main.start]= -1;
+        DFS(Main.start);
         Print();
     }
 }

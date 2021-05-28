@@ -5,11 +5,22 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
+import controller.MainFrame;
+import controller.MainFrame2;
+
 public class ReSimulate{
 
     public static int trace[] = new int[Main.MAXN];
     public static boolean done= false;
-    public ReSimulate(){}
+    public static ArrayList<Integer> Save = new ArrayList<Integer>();
+    public static ArrayList<Integer> Suggest = new ArrayList<Integer>();
+
+    public ReSimulate(){
+        Save.clear();
+        Suggest.clear();
+    }
 
     static void Reset()
     {
@@ -18,7 +29,7 @@ public class ReSimulate{
     }
 
     //  In ra đường đi
-    static void Trace(int index) {
+    static String Trace(int index) {
         ArrayList<Integer> path = new ArrayList<Integer>();
         while (true) {
             //System.out.print(index+ " ");
@@ -30,15 +41,17 @@ public class ReSimulate{
         // System.out.println(1);
         path.add(Main.start);
         Collections.reverse(path);
+        String res= "";
         for(int u: path)
-            System.out.print(u+ " ");
-        System.out.println();
+            res= res+ u+ " ";
+        //System.out.println();
+        return res;
     }
 
 
     static void DFS(int index) {
         if (index == Main.end) {
-            Trace(Main.end);
+            MainFrame2.defaultTableModel.addRow(new Object[]{Trace(Main.end)});
             return;
         }
         //System.out.println(index);
@@ -82,6 +95,31 @@ public class ReSimulate{
                 deque.offer(v);
             }
             if(done== true) break;
+        }
+    }
+
+    public static void OnTheWay()
+    {
+        Save.add(Main.CurrentNode);
+
+        Suggest.clear();
+        int Pre= 0;
+        Suggest= Main.point[Main.CurrentNode].getList();
+
+        MainFrame2.jTextField3.setText(String.valueOf(Suggest));
+        System.out.println(Suggest);
+        System.out.println("Your choice: ");
+
+        while(true){
+            //Scanner scanner = new Scanner(System.in);
+            //Main.CurrentNode= scanner.nextInt();
+            Main.CurrentNode= Integer.parseInt(JOptionPane.showInputDialog(null, "Input your next node:"));
+            boolean nice= Suggest.contains(Main.CurrentNode);
+            if(nice){
+                System.out.println("Nice choice!!!");
+                break;
+            }
+            else System.out.println("Bad choice, please choose another one: ");
         }
     }
 
