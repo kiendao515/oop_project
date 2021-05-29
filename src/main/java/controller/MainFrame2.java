@@ -27,8 +27,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     static  String filename;
     static String s1,s2;
     // public static List<Integer> suggest = new ArrayList<Integer>();
-    static org.graphstream.graph.Graph graph = new SingleGraph("main graph");
-    static Map<Integer,List<Integer>> map= new HashMap<>();
+    public static org.graphstream.graph.Graph graph = new SingleGraph("main graph");
     public MainFrame2() {
         initComponents();
     }
@@ -37,68 +36,107 @@ public class MainFrame2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-
+    static Simulate simulate= new Simulate();
 
     // có
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:suggestion
-        int start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
-        int end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
-        Main.start=start;
-        Main.end=end;
-        Simulate simulate= new Simulate();
-        System.out.println("You now are in node " + Main.CurrentNode);
+        Main.start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
+        Main.end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
+        Main.CurrentNode= Main.start;
+        graph.getNode(String.valueOf(Main.CurrentNode)).setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
+                " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 20px; text-alignment: center;");
+        simulate= new Simulate();
         simulate.FindAllPaths();
-        jTextField2.setText(String.valueOf(start));
+        simulate.Save.add(Main.CurrentNode);
+        simulate.Recommend();
+        Simulate.map.put(Main.CurrentNode,Simulate.Suggest);
     }
 
-    static int start;
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
-        int end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
-        Main.start=start;
-        Main.end=end;
-        ReSimulate reSimulate= new ReSimulate();
-        //reSimulate.FindAllPaths(start,end);
-    }
-
-    // next
-    // next button(ko co suggestion)
+    Map<Integer,List<Integer>> map= new HashMap<>();
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
         /// co suggestion
-         Main.CurrentNode=start ;
-        while (true) {
-            //jTextField1.setText(String.valueOf(simulate.Suggest));
-            simulate.OnTheWay();
-            if (Main.CurrentNode == Main.end)
-                break;
-        }
-
-        /// ko co suggestion
-//
-//        Main.CurrentNode= Main.start;
-//        ReSimulate reSimulate= new ReSimulate();
-//
-//        System.out.println("You now are in node " + Main.CurrentNode);
-//       // reSimulate.FindAllPaths();
-//        while (true) {
-//            //jTextField1.setText(String.valueOf(simulate.Suggest));
-//            reSimulate.OnTheWay();
-//            if (Main.CurrentNode == Main.end)
-//                break;
-//        }
-
-
+        simulate.Input();
+        simulate.Recommend();
+//        System.out.println("textfield hien tai:"+jTextField2.getText()+" suggestion hien tai:"+simulate.Suggest);
+        System.out.println("save:"+simulate.Save);
+        drawRoute();
+        //map.put(Integer.valueOf(jTextField2.getText()),simulate.Suggest);
     }
-
-
-    //prev button(ko suggestion)
+    //prev button(co suggestion)
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        if(Main.CurrentNode!=Main.start){
+            System.out.println("current node:"+Main.CurrentNode);
+            Node node= graph.getNode((jTextField2.getText()));
+            node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
+            clearRoute();
+            Simulate.Save.remove(Simulate.Save.size()-1);
+//            clearRoute();
+            drawRoute();
+            System.out.println("Save:"+Simulate.Save);
+            drawRoute();
+            if(Simulate.Save.size()!=0) jTextField2.setText(String.valueOf((Simulate.Save.get(Simulate.Save.size()-1))));
+            for (int me : map.keySet()) {
+                System.out.println("key:"+me+" value:"+map.get(me));
+                if(me==(Integer.parseInt(jTextField2.getText()))){
+                    System.out.println("ok");
+                    jTextField1.setText(String.valueOf(map.get(me)));
+                    System.out.println("suggestion:"+map.get(me));
+                    break;
+                }
+            }
+        }
+    }
+
+    void clearRoute(){
+        if(simulate.Save.size()>=2){
+            for(int i=0;i<simulate.Save.size()-1;i++){
+                Edge e=graph.getEdge(simulate.Save.get(i)+""+simulate.Save.get(i+1));
+                e.setAttribute("ui.style","arrow-shape: arrow;fill-color :#7a7a73;size :1px;arrow-size :5px;");
+                // check=true;
+            }
+        }
+    }
+
+    void drawRoute(){
+        if(simulate.Save.size()>=2){
+            for(int i=0;i<simulate.Save.size()-1;i++){
+                Edge e=graph.getEdge(simulate.Save.get(i)+""+simulate.Save.get(i+1));
+                e.setAttribute("ui.style","arrow-shape: arrow;fill-color :#32a852;arrow-size :8px;size: 4px;");
+                // check=true;
+            }
+        }
     }
 
 
+
+    static ReSimulate reSimulate= new ReSimulate();
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        Main.start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
+        Main.end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
+        Main.CurrentNode= Main.start;
+        reSimulate= new ReSimulate();
+        reSimulate.Save.add(Main.CurrentNode);
+        reSimulate.Recommend();
+    }
+
+
+
+
+
+
+    // next
+    // next button(co suggestion)
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        System.out.println("You now are in node " + Main.CurrentNode);
+        reSimulate.Input();
+        reSimulate.Recommend();
+        jTextField4.setText("");
+    }
     // key enter
     static String getNumberNode;
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {
@@ -124,7 +162,8 @@ public class MainFrame2 extends javax.swing.JFrame {
         for(int i=0;i<temp2.length;i++){
             System.out.println("day la tem2:"+temp2[i]);
             Node node=graph.getNode(temp2[i]);
-            node.setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999; shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 20px; text-alignment: center;");
+            node.setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
+                    " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 20px; text-alignment: center;");
             check=true;
         }
     }
@@ -140,12 +179,14 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
+        getRootPane().setDefaultButton(jButton9);
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            getNumberNode=jTextField3.getText();
+            getNumberNode= getNumberNode.replaceAll("\\s+","");
+        }
     }
 
-    // next button (co suggestion)
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+    // next button (ko co suggestion)
 
     //back button (co suggestion)
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -651,7 +692,6 @@ public class MainFrame2 extends javax.swing.JFrame {
     static String temp;
     static boolean check=false;
     public static DefaultTableModel defaultTableModel;
-    static Simulate simulate;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         if(check){
             clear();

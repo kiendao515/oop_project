@@ -21,35 +21,35 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Nhập điểm đầu và điểm cuối
-        System.out.print("Start: ");
-        start = scanner.nextInt();
-        System.out.print("End: ");
-        end = scanner.nextInt();
-
-
-        // Trường hợp có gợi ý
-        // Tìm đường đi với DFS
-        Simulate simulate = new Simulate();
-
-        //simulate.FindAllPaths();
-        // Gợi ý đường đi
-        System.out.println("You now are in node " + start);
-        while (true) {
-            Simulate.OnTheWay();
-            if (CurrentNode == NumberNode)
-                break;
-        }
-
-
-        /// Trường hợp ko có gợi ý
-        ReSimulate reSimulate = new ReSimulate();
-
-        reSimulate.FindAllPaths();
-        reSimulate.FindShortestPath();
-    }
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//
+//        // Nhập điểm đầu và điểm cuối
+//        System.out.print("Start: ");
+//        start = scanner.nextInt();
+//        System.out.print("End: ");
+//        end = scanner.nextInt();
+//
+//
+//        // Trường hợp có gợi ý
+//        // Tìm đường đi với DFS
+//        Simulate simulate = new Simulate();
+//
+//        //simulate.FindAllPaths();
+//        // Gợi ý đường đi
+//        System.out.println("You now are in node " + start);
+//        while (true) {
+//            Simulate.OnTheWay();
+//            if (CurrentNode == NumberNode)
+//                break;
+//        }
+//
+//
+//        /// Trường hợp ko có gợi ý
+//        ReSimulate reSimulate = new ReSimulate();
+//
+//        reSimulate.FindAllPaths();
+//        reSimulate.FindShortestPath();
+//    }
 
 }

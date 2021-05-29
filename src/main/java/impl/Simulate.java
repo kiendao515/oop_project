@@ -1,8 +1,6 @@
 package impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 import javax.swing.JOptionPane;
 
@@ -68,6 +66,7 @@ public class Simulate{
         path.add(Main.start);
         Collections.reverse(path);
         Path.add(path);
+        //System.out.println(path);
     }
 
     static void DFS(int index) {
@@ -110,10 +109,10 @@ public class Simulate{
         return false;
     }
 
-    public static void OnTheWay(){
-        Save.add(Main.CurrentNode);
+    public static void Recommend()
+    {
+        //Save.add(Main.CurrentNode);
         System.out.println("I have some suggestions for your next node: ");
-
         int Left, Right, left= -1, right= Path.size()- 1;
         while(right- left> 1){
             int middle= (right+ left)/ 2;
@@ -140,6 +139,8 @@ public class Simulate{
             //if(Suggest.get(Suggest.size()- 1)!= paths.get(Save.size()))
             if(paths.size()== Save.size()){
                 Main.CurrentNode= Main.end;
+                JOptionPane.showMessageDialog(null,"Finding routes successfully!!");
+                //MainFrame2.jTextField2.setText("");
                 return;
             }
             if(paths.get(Save.size())!= Pre)
@@ -148,17 +149,33 @@ public class Simulate{
                 Pre= paths.get(Save.size());
             }
         }
+        if(!MainFrame2.jTextField2.getText().equals("")){
+            map.put(Integer.parseInt(MainFrame2.jTextField2.getText()),Suggest);
+        }else{
+            MainFrame2.jTextField2.setText(String.valueOf(Main.start));
+        }
 
         MainFrame2.jTextField1.setText(String.valueOf(Suggest));
-        System.out.println(Suggest);
-        System.out.println("Your choice: ");
-        Main.CurrentNode= Integer.parseInt(MainFrame2.jTextField2.getText());
-        boolean nice= Suggest.contains(Main.CurrentNode);
+        System.out.println("suggest ne"+Suggest);
+    }
 
+    public static Map<Integer,List<Integer>> map= new HashMap<>();
+    public static void Input(){
+        int input = Integer.parseInt(MainFrame2.jTextField2.getText());
+        boolean nice = Suggest.contains(input);
+        if (nice) {
+            MainFrame2.graph.getNode(String.valueOf(input)).setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
+                    " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 20px; text-alignment: center;");
+            System.out.println("Nice choice!!!");
+            Main.CurrentNode = input;
+            Save.add(input);
+           // map.put(input,Suggest);
+        } else
+            System.out.println("Bad choice, please choose another one: ");
     }
 
     //  Tìm tất cả đường đi
-    public void FindAllPaths()
+    public static void FindAllPaths()
     {
         Reset();
         trace[Main.start]= -1;

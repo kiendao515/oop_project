@@ -98,29 +98,34 @@ public class ReSimulate{
         }
     }
 
-    public static void OnTheWay()
+    public static void Recommend()
     {
-        Save.add(Main.CurrentNode);
-
         Suggest.clear();
-        int Pre= 0;
-        Suggest= Main.point[Main.CurrentNode].getList();
-
-        MainFrame2.jTextField3.setText(String.valueOf(Suggest));
-        System.out.println(Suggest);
-        System.out.println("Your choice: ");
-
-        while(true){
-            //Scanner scanner = new Scanner(System.in);
-            //Main.CurrentNode= scanner.nextInt();
-            Main.CurrentNode= Integer.parseInt(JOptionPane.showInputDialog(null, "Input your next node:"));
-            boolean nice= Suggest.contains(Main.CurrentNode);
-            if(nice){
-                System.out.println("Nice choice!!!");
-                break;
-            }
-            else System.out.println("Bad choice, please choose another one: ");
+        System.out.println(Main.CurrentNode);
+        if(Main.CurrentNode== Main.end)
+        {
+            MainFrame2.jTextField3.setText("You re in the final!");
+            return;
         }
+
+        Suggest= Main.point[Main.CurrentNode].getList();
+        System.out.println(Main.point[Main.CurrentNode].getList());
+        MainFrame2.jTextField3.setText(String.valueOf(Suggest));
+        //System.out.println(String.valueOf(Suggest));
+    }
+
+    public static void Input(){
+
+        int input= Integer.parseInt(MainFrame2.jTextField4.getText());
+        boolean nice= Suggest.contains(input);
+        if(nice){
+            System.out.println("Nice choice!!!");
+            Main.CurrentNode= input;
+            Save.add(Main.CurrentNode);
+        }
+        else
+            System.out.println("Bad choice, please choose another one: ");
+
     }
 
 }
