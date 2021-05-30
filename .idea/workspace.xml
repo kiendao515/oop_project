@@ -3,10 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="dacd531b-9fd5-4dfe-9373-0b3e6243e3ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GraphGui.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainFrame.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainFrame2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainFrame2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/impl/ReSimulate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/ReSimulate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/impl/Simulate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Simulate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/MainFrame2$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame2$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/MainFrame2$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame2$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/MainFrame2$11.class" afterDir="false" />
@@ -25,7 +35,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame2$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/MainFrame2$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame2$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/MainFrame2$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controller/MainFrame2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/MainFrame2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/impl/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/impl/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entity/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entity/Point.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/impl/ReSimulate.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/impl/ReSimulate.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/impl/Simulate.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/impl/Simulate.class" afterDir="false" />
     </list>
@@ -229,7 +239,10 @@
       <workItem from="1622125122918" duration="4292000" />
       <workItem from="1622131047013" duration="817000" />
       <workItem from="1622167097418" duration="23339000" />
-      <workItem from="1622252315368" duration="8311000" />
+      <workItem from="1622252315368" duration="30191000" />
+      <workItem from="1622307858361" duration="1966000" />
+      <workItem from="1622317923082" duration="805000" />
+      <workItem from="1622343266790" duration="7521000" />
     </task>
     <servers />
   </component>
@@ -265,22 +278,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="155" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1622123932479" />
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom" timestamp="1622260240907">
+    <state width="1493" height="216" key="GridCell.Tab.0.bottom" timestamp="1622363178395">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622260240907" />
-    <state width="1493" height="275" key="GridCell.Tab.0.center" timestamp="1622260240907">
+    <state width="1493" height="216" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622363178395" />
+    <state width="1493" height="216" key="GridCell.Tab.0.center" timestamp="1622363178394">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1622260240907" />
-    <state width="1493" height="275" key="GridCell.Tab.0.left" timestamp="1622260240907">
+    <state width="1493" height="216" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1622363178394" />
+    <state width="1493" height="216" key="GridCell.Tab.0.left" timestamp="1622363178394">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1622260240907" />
-    <state width="1493" height="275" key="GridCell.Tab.0.right" timestamp="1622260240907">
+    <state width="1493" height="216" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1622363178394" />
+    <state width="1493" height="216" key="GridCell.Tab.0.right" timestamp="1622363178394">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1622260240907" />
+    <state width="1493" height="216" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1622363178394" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1620233418695">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -305,10 +318,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1621934647655" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1622252327291">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1622343295838">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1622252327291" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1622343295838" />
     <state x="209" y="109" key="new project wizard" timestamp="1622123823799">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -321,9 +334,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1622191403390" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1622257859638">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1622274988261">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1622257859638" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1622274988261" />
   </component>
 </project>

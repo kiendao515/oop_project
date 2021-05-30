@@ -14,6 +14,9 @@ public class Point {
     public Point(){
         list.clear();
     }
+    public void display(ArrayList<Integer> list){
+        System.out.println(list);
+    }
 
 
     public ArrayList<Integer> getList() {

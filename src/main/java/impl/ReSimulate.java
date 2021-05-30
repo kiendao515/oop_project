@@ -7,29 +7,28 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-import controller.MainFrame;
 import controller.MainFrame2;
 
 public class ReSimulate{
 
-    public static int trace[] = new int[Main.MAXN];
-    public static boolean done= false;
-    public static ArrayList<Integer> Save = new ArrayList<Integer>();
-    public static ArrayList<Integer> Suggest = new ArrayList<Integer>();
+    public  int trace[] = new int[Main.MAXN];
+    public  boolean done= false;
+    public static   ArrayList<Integer> Save = new ArrayList<Integer>();
+    public  ArrayList<Integer> Suggest = new ArrayList<Integer>();
 
     public ReSimulate(){
         Save.clear();
         Suggest.clear();
     }
 
-    static void Reset()
+    void Reset()
     {
         for(int i= 0; i<= Main.NumberNode; i++)
             trace[i]= 0;
     }
 
     //  In ra đường đi
-    static String Trace(int index) {
+    String Trace(int index) {
         ArrayList<Integer> path = new ArrayList<Integer>();
         while (true) {
             //System.out.print(index+ " ");
@@ -49,7 +48,7 @@ public class ReSimulate{
     }
 
 
-    static void DFS(int index) {
+    void DFS(int index) {
         if (index == Main.end) {
             MainFrame2.defaultTableModel.addRow(new Object[]{Trace(Main.end)});
             return;
@@ -65,7 +64,7 @@ public class ReSimulate{
         }
     }
 
-    public static void FindAllPaths()
+    public  void FindAllPaths()
     {
         Reset();
         trace[Main.start]= -1;
@@ -73,13 +72,13 @@ public class ReSimulate{
     }
 
     //  Tìm đường đi ngắn nhất
-    public void FindShortestPath()
+    public String FindShortestPath()
     {
+        String rs="";
         Reset();
         Deque<Integer> deque= new LinkedList<Integer>();
         deque.push(Main.start);
         trace[Main.start]= -1;
-
         System.out.print("Đường đi ngắn nhất: ");
         while(!deque.isEmpty()){
             int u= deque.getFirst();
@@ -88,7 +87,7 @@ public class ReSimulate{
                 if(trace[v]!= 0) continue;
                 trace[v]= u;
                 if(v== Main.end){
-                    Trace(v);
+                    rs= Trace(v);
                     done= true;
                     break;
                 }
@@ -96,29 +95,32 @@ public class ReSimulate{
             }
             if(done== true) break;
         }
+        return rs;
     }
 
-    public static void Recommend()
+    public  void Recommend()
     {
-        Suggest.clear();
         System.out.println(Main.CurrentNode);
         if(Main.CurrentNode== Main.end)
         {
-            MainFrame2.jTextField3.setText("You re in the final!");
+            MainFrame2.jTextField3.setText("You re in the finish!");
+            JOptionPane.showMessageDialog(null,"Finding routes successfully!!");
             return;
         }
 
         Suggest= Main.point[Main.CurrentNode].getList();
-        System.out.println(Main.point[Main.CurrentNode].getList());
+        Main.point[Main.CurrentNode].display( Main.point[Main.CurrentNode].getList());
         MainFrame2.jTextField3.setText(String.valueOf(Suggest));
-        //System.out.println(String.valueOf(Suggest));
     }
 
-    public static void Input(){
+    public  void Input(){
 
         int input= Integer.parseInt(MainFrame2.jTextField4.getText());
         boolean nice= Suggest.contains(input);
         if(nice){
+            MainFrame2.graph.getNode(String.valueOf(input)).setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
+                    " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
+
             System.out.println("Nice choice!!!");
             Main.CurrentNode= input;
             Save.add(Main.CurrentNode);

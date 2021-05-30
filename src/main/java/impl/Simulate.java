@@ -165,7 +165,7 @@ public class Simulate{
         boolean nice = Suggest.contains(input);
         if (nice) {
             MainFrame2.graph.getNode(String.valueOf(input)).setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
-                    " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 20px; text-alignment: center;");
+                    " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
             System.out.println("Nice choice!!!");
             Main.CurrentNode = input;
             Save.add(input);

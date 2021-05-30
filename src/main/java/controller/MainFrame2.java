@@ -12,9 +12,11 @@ import org.graphstream.ui.swing_viewer.ViewPanel;
 import org.graphstream.ui.view.Viewer;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.*;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,10 +32,21 @@ public class MainFrame2 extends javax.swing.JFrame {
     public static org.graphstream.graph.Graph graph = new SingleGraph("main graph");
     public MainFrame2() {
         initComponents();
+        jLabel1.setVisible(false);
+        jButton6.setVisible(false);
+        jButton7.setVisible(false);
+        jButton8.setVisible(false);
+        jButton9.setVisible(false);
+        jTextField1.setVisible(false);
+        jTextField2.setVisible(false);
+        jTextField3.setVisible(false);
+        jTextField4.setVisible(false);
+        jTextField5.setVisible(false);
     }
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,"hshs");
     }
 
     static Simulate simulate= new Simulate();
@@ -41,11 +54,31 @@ public class MainFrame2 extends javax.swing.JFrame {
     // có
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:suggestion
+        jLabel1.setVisible(true);
+        jButton6.setVisible(true);
+        jButton7.setVisible(true);
+        jTextField1.setVisible(true);
+        jTextField2.setVisible(true);
+        jButton8.setVisible(false);
+        jButton9.setVisible(false);
+        jTextField3.setVisible(false);
+        jTextField4.setVisible(false);
+        jTextField5.setVisible(false);
+        if(temp2!=null){
+            for(int i=0;i<temp2.length;i++){
+                Node node=graph.getNode(temp2[i]);
+                node.removeAttribute("shadow-mode: plain; shadow-width: 0px; shadow-color: #999; shadow-offset: 3px, -3px;");
+                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
+            }
+            for(int i=0;i<temp2.length-1;i++){
+                graph.getEdge((temp2[i]+""+temp2[i+1])).setAttribute("ui.style","arrow-shape: arrow;fill-color :#7a7a73;size: 1px;arrow-size :5px;");
+            }
+        }
         Main.start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
         Main.end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
         Main.CurrentNode= Main.start;
         graph.getNode(String.valueOf(Main.CurrentNode)).setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
-                " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 20px; text-alignment: center;");
+                " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
         simulate= new Simulate();
         simulate.FindAllPaths();
         simulate.Save.add(Main.CurrentNode);
@@ -53,39 +86,29 @@ public class MainFrame2 extends javax.swing.JFrame {
         Simulate.map.put(Main.CurrentNode,Simulate.Suggest);
     }
 
-    Map<Integer,List<Integer>> map= new HashMap<>();
+    public static Map<Integer,List<Integer>> map= new HashMap<>();
+    //next btn
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
         /// co suggestion
         simulate.Input();
         simulate.Recommend();
-//        System.out.println("textfield hien tai:"+jTextField2.getText()+" suggestion hien tai:"+simulate.Suggest);
-        System.out.println("save:"+simulate.Save);
         drawRoute();
-        //map.put(Integer.valueOf(jTextField2.getText()),simulate.Suggest);
+        jTextField2.setText("");
     }
+
     //prev button(co suggestion)
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if(Main.CurrentNode!=Main.start){
             System.out.println("current node:"+Main.CurrentNode);
-            Node node= graph.getNode((jTextField2.getText()));
-            node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
+            Node node= graph.getNode(String.valueOf(simulate.Save.get(Simulate.Save.size()-1)));
+            node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
             clearRoute();
             Simulate.Save.remove(Simulate.Save.size()-1);
-//            clearRoute();
+            simulate.Recommend();
             drawRoute();
+            jTextField2.setText("");
             System.out.println("Save:"+Simulate.Save);
-            drawRoute();
-            if(Simulate.Save.size()!=0) jTextField2.setText(String.valueOf((Simulate.Save.get(Simulate.Save.size()-1))));
-            for (int me : map.keySet()) {
-                System.out.println("key:"+me+" value:"+map.get(me));
-                if(me==(Integer.parseInt(jTextField2.getText()))){
-                    System.out.println("ok");
-                    jTextField1.setText(String.valueOf(map.get(me)));
-                    System.out.println("suggestion:"+map.get(me));
-                    break;
-                }
-            }
         }
     }
 
@@ -114,29 +137,86 @@ public class MainFrame2 extends javax.swing.JFrame {
     static ReSimulate reSimulate= new ReSimulate();
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        jLabel1.setVisible(true);
+        jButton8.setVisible(true);
+        jButton9.setVisible(true);
+        jTextField3.setVisible(true);
+        jTextField4.setVisible(true);
+        jButton6.setVisible(false);
+        jButton7.setVisible(false);
+        jTextField1.setVisible(false);
+        jTextField2.setVisible(false);
+        jTextField5.setVisible(true);
+//        reClearRoute();
+        
+        if(temp2!=null){
+            for(int i=0;i<temp2.length;i++){
+                Node node=graph.getNode(temp2[i]);
+                node.removeAttribute("shadow-mode: plain; shadow-width: 0px; shadow-color: #999; shadow-offset: 3px, -3px;");
+                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
+            }
+            for(int i=0;i<temp2.length-1;i++){
+                graph.getEdge((temp2[i]+""+temp2[i+1])).setAttribute("ui.style","arrow-shape: arrow;fill-color :#7a7a73;size: 1px;arrow-size :5px;");
+            }
+        }
         Main.start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
         Main.end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
         Main.CurrentNode= Main.start;
+        graph.getNode(String.valueOf(Main.CurrentNode)).setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
+                "shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
         reSimulate= new ReSimulate();
         reSimulate.Save.add(Main.CurrentNode);
         reSimulate.Recommend();
     }
 
 
-
-
-
-
-    // next
-    // next button(co suggestion)
-
+    // next button(ko suggestion)
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        if(Integer.parseInt(jTextField4.getText())==Main.start){
+            Node node= graph.getNode(String.valueOf(Main.start));
+            node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
+        }
         System.out.println("You now are in node " + Main.CurrentNode);
         reSimulate.Input();
         reSimulate.Recommend();
+        System.out.println("size:"+ map.size());
         jTextField4.setText("");
+        jTextField5.setText(String.valueOf(reSimulate.Save));
+        if(reSimulate.Suggest.size()==0) JOptionPane.showMessageDialog(null,"Sorry no node detect!");
+        reDrawRoute();
     }
+
+//    public static Map<Integer,List<Integer>>map = new
+
+    //back button (ko suggestion)
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        if(reSimulate.Save.size()!=1){
+            System.out.println("current node:"+Main.CurrentNode);
+            Main.CurrentNode= reSimulate.Save.get(reSimulate.Save.size()-1);
+            Node node= graph.getNode(String.valueOf(Main.CurrentNode));
+            node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
+            reClearRoute();
+            jTextField4.setText("");
+            reSimulate.Save.remove(reSimulate.Save.size()-1);
+            jTextField5.setText(String.valueOf(reSimulate.Save));
+            for(int i=0;i<ReSimulate.Save.size();i++){
+                Node node2= graph.getNode(String.valueOf(ReSimulate.Save.get(i)));
+                node2.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
+            }
+            Main.CurrentNode= reSimulate.Save.get(reSimulate.Save.size()-1);
+            reSimulate.Recommend();
+            reDrawRoute();
+            System.out.println("Save:"+reSimulate.Save);
+        }else{
+            Node node= graph.getNode(String.valueOf(reSimulate.Save.get(0)));
+            node.setAttribute("ui.style","stroke-mode: plain;shape:circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
+            jTextField3.setText(String.valueOf(Main.start));
+            jTextField5.setText("");
+        }
+    }
+
     // key enter
     static String getNumberNode;
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {
@@ -146,13 +226,13 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
+        resetRow();
         if(check){
-            resetRow();
+            reClearRoute();
         }
         int x= jTable1.getSelectedRow();
         String y=(String)jTable1.getValueAt(x,0);
         y=y.trim();
-        // System.out.println(y);
         temp2= y.split(" ");
         for(int i=0;i<temp2.length-1;i++){
             System.out.println(temp2[i]+""+temp2[i+1]);
@@ -160,10 +240,9 @@ public class MainFrame2 extends javax.swing.JFrame {
             graph.getEdge((temp2[i]+""+temp2[i+1])).setAttribute("ui.style","arrow-shape: arrow;fill-color :#32a852;arrow-size :8px;size: 4px;");
         }
         for(int i=0;i<temp2.length;i++){
-            System.out.println("day la tem2:"+temp2[i]);
             Node node=graph.getNode(temp2[i]);
             node.setAttribute("ui.style", "shadow-mode: plain; shadow-width: 0px; shadow-color: #999;" +
-                    " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 20px; text-alignment: center;");
+                    " shadow-offset: 3px, -3px;stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
             check=true;
         }
     }
@@ -186,15 +265,65 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
     }
 
-    // next button (ko co suggestion)
 
-    //back button (co suggestion)
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+
+    void reClearRoute(){
+        if(reSimulate.Save.size()>=2){
+            for(int i=0;i<reSimulate.Save.size()-1;i++){
+                Edge e=graph.getEdge(reSimulate.Save.get(i)+""+reSimulate.Save.get(i+1));
+                e.setAttribute("ui.style","arrow-shape: arrow;fill-color :#7a7a73;size :1px;arrow-size :5px;");
+                // check=true;
+            }
+        }
     }
+
+    void reDrawRoute(){
+        if(reSimulate.Save.size()>=2){
+            for(int i=0;i<reSimulate.Save.size()-1;i++){
+                Edge e=graph.getEdge(reSimulate.Save.get(i)+""+reSimulate.Save.get(i+1));
+                e.setAttribute("ui.style","arrow-shape: arrow;fill-color :#32a852;arrow-size :8px;size: 4px;");
+                // check=true;
+            }
+        }
+    }
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        String msg ="+Take screen:chụp ảnh và lưu lại ảnh của đồ thị bất cứ khi nào người dùng muốn.\n" +
+                    "+Simulation:có hai kiểu simulation tùy từng truòng hợp người dùng muốn sử dụng.\n" +
+                    "Ví dụ: khi người dùng muốn tìm đường đi từ hai đỉnh bất kì và muốn chắc chắn rằng mình sẽ đến được đích thì\n" +
+                    "nên dùng chức năng Simulation with suggestion, còn nếu người đó muốn tự do đi thì nên chọn Simulation with no guildline.\n" +
+                    "+Folder icon:dùng để mở file cần chọn.\n" +
+                    "+Display graph icon: vẽ đồ thị.\n" +
+                    "+Pencil icon: chỉnh sửa đồ thị(thêm cạnh,xóa cạnh,thêm nút,xóa nút)\n" +
+                    "+Lock icon:khóa đồ thị và reset lại đồ thị.\n" +
+                    "+Search icon:tìm kiếm tất cả dựa vào hai điểm đầu cuối do người dùng nhập.";
+        JOptionPane optionPane = new JOptionPane();
+        optionPane.setMessage(msg);
+        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog(null, "Graph visualization");
+        dialog.setVisible(true);
+
+    }
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        String message="Đào Xuân An – 20190076\n" +
+                       "Đào Trung Kiên – 20194306\n" +
+                       "Nguyễn Tiến Đạt- 20194243\n" +
+                       "Nguyễn Quang Long -2019432\n" +
+                       "Nguyễn Bá Bình – 2019423\n" +
+                       "Đinh Trọng Nghĩa -20194340\n";
+        JOptionPane optionPane = new JOptionPane();
+        optionPane.setMessage(message);
+        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog(null, "Member");
+        dialog.setVisible(true);
+    }
+
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
+        jMenuItem4 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -210,17 +339,20 @@ public class MainFrame2 extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -241,7 +373,8 @@ public class MainFrame2 extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jTable1.setBackground(new java.awt.Color(204, 204, 255));
+        jTable1.setFont(new java.awt.Font("Dubiel", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
 
@@ -267,52 +400,50 @@ public class MainFrame2 extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Browse File");
+        jButton1.setBackground(new java.awt.Color(204, 204, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\opened_folder_30px.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setBackground(new java.awt.Color(204, 204, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("Display Graph");
+        jButton2.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\system_task_30px.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setBackground(new java.awt.Color(204, 204, 255));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setText("Edit Graph");
+        jButton3.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\edit_30px.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jButton4.setBackground(new java.awt.Color(204, 204, 255));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton4.setText("Lock Graph");
+        jButton4.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\lock_30px.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jButton5.setBackground(new java.awt.Color(204, 204, 255));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setText("Finding Routes");
+        jButton5.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\search_30px.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -331,7 +462,7 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jButton6.setText("Prev");
+        jButton6.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\u_turn_to_left_30px.png"))); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -339,7 +470,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         });
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jButton7.setText("Next");
+        jButton7.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\fast_forward_30px.png"))); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -352,17 +483,14 @@ public class MainFrame2 extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel2.setText("Suggestion ");
-
-        jButton8.setText("Prev");
+        jButton8.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\u_turn_to_left_30px.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Next");
+        jButton9.setIcon(new javax.swing.ImageIcon(("C:\\Users\\admin\\IdeaProjects\\OopsBigAssignment\\images\\hand_right_25px.png"))); // NOI18N
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -379,104 +507,88 @@ public class MainFrame2 extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addContainerGap(28, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButton9))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jButton6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton7)))
-                                .addGap(18, 18, 18))
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(50, 50, 50)
-                                                .addComponent(jLabel1))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(31, 31, 31)
-                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jButton2)
-                                                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                        .addGap(1, 1, 1)
-                                                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel2)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jButton1)
-                                .addGap(38, 38, 38)
+                                .addGap(34, 34, 34)
                                 .addComponent(jButton2)
-                                .addGap(35, 35, 35)
+                                .addGap(34, 34, 34)
                                 .addComponent(jButton3)
-                                .addGap(38, 38, 38)
+                                .addGap(35, 35, 35)
                                 .addComponent(jButton4)
-                                .addGap(37, 37, 37)
+                                .addGap(35, 35, 35)
                                 .addComponent(jButton5)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton6)
-                                        .addComponent(jButton7))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(4, 4, 4)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton8)
-                                        .addComponent(jButton9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuBar1.setBackground(new java.awt.Color(204, 204, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jMenu1.setText("File");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-
-        jMenuItem1.setText("Open File");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        jMenu1.setText("Take Screen");
+        jMenu1.setFont(new java.awt.Font("Sitka Text", 1, 15)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
-
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Simulation");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Sitka Text", 1, 15)); // NOI18N
 
-        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jMenuItem2.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         jMenuItem2.setText("Simulation with suggestion");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,7 +597,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
-        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jMenuItem3.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         jMenuItem3.setText("Simulation with no guild line");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -496,6 +608,25 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setBackground(new java.awt.Color(204, 204, 255));
+        jMenu3.setText("Usage");
+        jMenu3.setFont(new java.awt.Font("Sitka Text", 1, 15)); // NOI18N
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Information");
+        jMenu4.setFont(new java.awt.Font("Sitka Text", 1, 15)); // NOI18N
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -504,8 +635,8 @@ public class MainFrame2 extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -514,16 +645,25 @@ public class MainFrame2 extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>
+    void setComponent(){
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+    }
+
     //browse file
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         Remove();
+        setComponent();
         JFileChooser chooser= new JFileChooser();
         chooser.setCurrentDirectory(new File("C:\\Users\\admin\\Dropbox\\project_inputtest"));
         chooser.showOpenDialog(null);
@@ -546,6 +686,31 @@ public class MainFrame2 extends javax.swing.JFrame {
                 graph.removeNode(String.valueOf(index));
 
     }
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        saveImage();
+    }
+    private void saveImage(){
+        JFileChooser chooser= new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        BufferedImage imagebuf=null;
+        try {
+            imagebuf = new Robot().createScreenCapture(jPanel1.bounds());
+        } catch (AWTException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        Graphics2D graphics2D = imagebuf.createGraphics();
+        jPanel1.paint(graphics2D);
+        try {
+            ImageIO.write(imagebuf,"jpg", new File(file.getAbsolutePath()));
+            JOptionPane.showMessageDialog(null,"Save image successfully! ");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            System.out.println("error");
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         jPanel1.removeAll();
@@ -565,7 +730,7 @@ public class MainFrame2 extends javax.swing.JFrame {
             if(Main.exist[index]){
                 graph.addNode(String.valueOf(index));
                 e1=graph.getNode(String.valueOf(index));
-                e1.setAttribute("ui.style", "stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
+                e1.setAttribute("ui.style", "stroke-mode: plain;shape:circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
                 e1.setAttribute("ui.label", String.valueOf(index));
                 e1.setAttribute("ui.class","marked");
             }
@@ -573,7 +738,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                 Edge edge;
                 graph.addNode(String.valueOf(node));
                 e1=graph.getNode(String.valueOf(node));
-                e1.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
+                e1.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
                 e1.setAttribute("ui.label", String.valueOf(node));
                 graph.addEdge(index+""+node,String.valueOf(index),String.valueOf(node),true);
                 if(graph.getEdge(index+""+node)!=null){
@@ -610,7 +775,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         Node e1;
         graph.addNode(String.valueOf(str));
         e1=graph.getNode(str);
-        e1.setAttribute("ui.style", "stroke-mode: plain;shape:circle;fill-color: yellow;size: 20px; text-alignment: center;");
+        e1.setAttribute("ui.style", "stroke-mode: plain;shape:circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
         e1.setAttribute("ui.label", str);
         viewer.enableAutoLayout();
         Main.NumberNode= Math.max(Main.NumberNode, Integer.parseInt(str));
@@ -629,7 +794,9 @@ public class MainFrame2 extends javax.swing.JFrame {
     }
     static void removeNode(){
         String node=  JOptionPane.showInputDialog(null,"Input node:");
-        graph.removeNode(node);
+        if(graph.getNode(node)!=null){
+            graph.removeNode(node);
+        }else JOptionPane.showMessageDialog(null,"No node found!!");
         int a= Integer.parseInt(node);
         Main.exist[a]= false;
         Main.point[a].getList().clear();
@@ -643,7 +810,9 @@ public class MainFrame2 extends javax.swing.JFrame {
     static void removeEdge(){
         s1= JOptionPane.showInputDialog("Enter first node:");
         s2= JOptionPane.showInputDialog("Enter tail:");
-        graph.removeEdge(s2+s1);
+        if(graph.getEdge(s1+s2)!=null){
+            graph.removeEdge(s1+s2);
+        }else JOptionPane.showMessageDialog(null,"No edge found!");
         int i= Integer.parseInt(s1);
         for(int index= 0; index< Main.point[i].getList().size(); index++)
             if(Main.point[i].getList().get(index)== Integer.parseInt(s2))
@@ -677,11 +846,12 @@ public class MainFrame2 extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         viewer.disableAutoLayout();
+        setComponent();
         if(temp2!=null){
             for(int i=0;i<temp2.length;i++){
                 Node node=graph.getNode(temp2[i]);
                 node.removeAttribute("shadow-mode: plain; shadow-width: 0px; shadow-color: #999; shadow-offset: 3px, -3px;");
-                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
+                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
             }
             for(int i=0;i<temp2.length-1;i++){
                 graph.getEdge((temp2[i]+""+temp2[i+1])).setAttribute("ui.style","arrow-shape: arrow;fill-color :#7a7a73;size: 1px;arrow-size :5px;");
@@ -693,18 +863,29 @@ public class MainFrame2 extends javax.swing.JFrame {
     static boolean check=false;
     public static DefaultTableModel defaultTableModel;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
+        resetRow();
         if(check){
             clear();
         }
         defaultTableModel= new DefaultTableModel();
         Main.start= Integer.parseInt(JOptionPane.showInputDialog(null, "Input your first node:"));
         Main.end= Integer.parseInt(JOptionPane.showInputDialog(null, "Input your second node:"));
-        System.out.println(Main.start+ " "+ Main.end);
+        //System.out.println(Main.start+ " "+ Main.end);
         jTable1.setModel(new DefaultTableModel(null,new String[]{"All of routes"}));
         defaultTableModel.addColumn("All of routes:");
         ReSimulate reSimulate= new ReSimulate();
         reSimulate.FindAllPaths();
-
+         String routes= reSimulate.FindShortestPath();
+         JOptionPane.showMessageDialog(null,"Shortest route is:"+routes);
+        System.out.println("shortest routes:"+routes);
+         temp2= routes.trim().split(" ");
+        for(int i=0;i<temp2.length-1;i++){
+            graph.getEdge(temp2[i]+""+temp2[i+1]).setAttribute("ui.style","arrow-shape: arrow;fill-color :#32a852;arrow-size :8px;size: 4px;");
+        }
+        for(int i=0;i<temp2.length;i++){
+            graph.getNode(temp2[i]).setAttribute("ui.style","stroke-mode: plain;shape: circle;fill-color: #c277ed;size: 25px; text-alignment: center;");
+        }
+//        resetRow();
         jTable1.setModel(defaultTableModel);
     }
 
@@ -716,7 +897,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                 if(graph.getNode(String.valueOf(temp2[i]))==null) continue;
                 Node node=graph.getNode(String.valueOf(temp2[i]));
                 node.removeAttribute("shadow-mode: plain; shadow-width: 0px; shadow-color: #999; shadow-offset: 3px, -3px;");
-                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: yellow;size: 20px; text-alignment: center;");
+                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
                 // temp2[i]="";
             }
             for(int i=0;i<temp2.length-1;i++){
@@ -777,21 +958,23 @@ public class MainFrame2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
-    public static JTextField jTextField1;
-    public static JTextField jTextField2;
-    public static JTextField jTextField3;
-    public static JTextField jTextField4;
+    public static javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField jTextField2;
+    public static javax.swing.JTextField jTextField3;
+    public  static javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration
 }
