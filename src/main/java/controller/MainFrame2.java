@@ -44,11 +44,6 @@ public class MainFrame2 extends javax.swing.JFrame {
         jTextField5.setVisible(false);
     }
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"hshs");
-    }
-
     static Simulate simulate= new Simulate();
 
     // có
@@ -64,16 +59,22 @@ public class MainFrame2 extends javax.swing.JFrame {
         jTextField3.setVisible(false);
         jTextField4.setVisible(false);
         jTextField5.setVisible(false);
-        if(temp2!=null){
-            for(int i=0;i<temp2.length;i++){
-                Node node=graph.getNode(temp2[i]);
-                node.removeAttribute("shadow-mode: plain; shadow-width: 0px; shadow-color: #999; shadow-offset: 3px, -3px;");
-                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
-            }
-            for(int i=0;i<temp2.length-1;i++){
-                graph.getEdge((temp2[i]+""+temp2[i+1])).setAttribute("ui.style","arrow-shape: arrow;fill-color :#7a7a73;size: 1px;arrow-size :5px;");
+        resetRow();
+        //clear();
+        if(simulate.Save.size()>0){
+            for(int i=0;i<simulate.Save.size();i++){
+                graph.getNode(String.valueOf(simulate.Save.get(i))).setAttribute
+                        ("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
             }
         }
+        clearRoute();
+        if(reSimulate.Save.size()>0){
+            for(int i=0;i<reSimulate.Save.size();i++){
+                graph.getNode(String.valueOf(reSimulate.Save.get(i))).setAttribute
+                        ("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
+            }
+        }
+        reClearRoute();
         Main.start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
         Main.end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
         Main.CurrentNode= Main.start;
@@ -147,18 +148,23 @@ public class MainFrame2 extends javax.swing.JFrame {
         jTextField1.setVisible(false);
         jTextField2.setVisible(false);
         jTextField5.setVisible(true);
-//        reClearRoute();
-        
-        if(temp2!=null){
-            for(int i=0;i<temp2.length;i++){
-                Node node=graph.getNode(temp2[i]);
-                node.removeAttribute("shadow-mode: plain; shadow-width: 0px; shadow-color: #999; shadow-offset: 3px, -3px;");
-                node.setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
-            }
-            for(int i=0;i<temp2.length-1;i++){
-                graph.getEdge((temp2[i]+""+temp2[i+1])).setAttribute("ui.style","arrow-shape: arrow;fill-color :#7a7a73;size: 1px;arrow-size :5px;");
+        jTextField5.setText("");
+       // displayGraph();
+        resetRow();
+        clear();
+        if(reSimulate.Save.size()>0){
+            for(int i=0;i<reSimulate.Save.size();i++){
+                graph.getNode(String.valueOf(reSimulate.Save.get(i))).setAttribute("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
             }
         }
+        reClearRoute();
+        if(simulate.Save.size()>0){
+            for(int i=0;i<simulate.Save.size();i++){
+                graph.getNode(String.valueOf(simulate.Save.get(i))).setAttribute
+                        ("ui.style", "stroke-mode: plain;shape: circle;fill-color: #f5f29f;size: 20px; text-alignment: center;");
+            }
+        }
+        clearRoute();
         Main.start=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your first node:"));
         Main.end=Integer.parseInt(JOptionPane.showInputDialog(null,"Input your second node:"));
         Main.CurrentNode= Main.start;
@@ -664,6 +670,11 @@ public class MainFrame2 extends javax.swing.JFrame {
         // TODO add your handling code here:
         Remove();
         setComponent();
+       // reClearRoute();
+        resetRow();
+        MainFrame2.simulate.Save.clear();
+        MainFrame2.reSimulate.Save.clear();
+        //clearRoute();
         JFileChooser chooser= new JFileChooser();
         chooser.setCurrentDirectory(new File("C:\\Users\\admin\\Dropbox\\project_inputtest"));
         chooser.showOpenDialog(null);
@@ -711,8 +722,7 @@ public class MainFrame2 extends javax.swing.JFrame {
             System.out.println("error");
         }
     }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    void displayGraph(){
         jPanel1.removeAll();
         jPanel1.revalidate();
         jPanel1.repaint();
@@ -768,6 +778,10 @@ public class MainFrame2 extends javax.swing.JFrame {
         viewer.enableAutoLayout();
 
         setVisible(true);
+    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        displayGraph();
     }
 
     static void addnode(){
@@ -859,11 +873,11 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
     }
 
-    static String temp;
     static boolean check=false;
     public static DefaultTableModel defaultTableModel;
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         resetRow();
+        setComponent();
         if(check){
             clear();
         }
